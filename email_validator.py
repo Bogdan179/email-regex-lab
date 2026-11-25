@@ -55,3 +55,14 @@ def find_emails(text):
     valid = [addr for addr in found if is_valid_email(addr)]
     # убираем дубликаты, сохраняя порядок
     return list(dict.fromkeys(valid))
+
+
+def find_emails_in_file(file_path, encoding="utf-8"):
+    """Ищет e-mail адреса в текстовом файле.
+
+    Raises:
+        FileNotFoundError: если файл не существует.
+    """
+    with open(file_path, "r", encoding=encoding) as file:
+        text = file.read()
+    return find_emails(text)
