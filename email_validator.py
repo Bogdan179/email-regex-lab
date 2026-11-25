@@ -33,3 +33,25 @@ def is_valid_email(email):
     if ".." in local_part:
         return False
     return True
+
+
+# Регулярное выражение для поиска e-mail в тексте.
+EMAIL_PATTERN = re.compile(
+    r"(?<![\w.+-])"                   # слева не должно быть части адреса
+    r"[A-Za-z0-9](?:[A-Za-z0-9._%+-]*[A-Za-z0-9_%+-])?"
+    r"@"
+    r"(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\.)+"
+    r"[A-Za-z]{2,}"                    # домен верхнего уровня
+    r"(?![\w-])"                      # справа не должно быть части адреса
+)
+
+
+def find_emails(text):
+    """Ищет все синтаксически корректные e-mail в тексте.
+
+    Возвращает список уникальных адресов в порядке появления.
+    """
+    found = EMAIL_PATTERN.findall(text)
+    valid = [addr for addr in found if is_valid_email(addr)]
+    # убираем дубликаты, сохраняя порядок
+    return list(dict.fromkeys(valid))
