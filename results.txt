@@ -1,0 +1,71 @@
+======================================================================
+РЕЗУЛЬТАТЫ РАБОТЫ ПРОГРАММЫ
+Лабораторная работа: проверка и поиск синтаксически корректных e-mail
+======================================================================
+
+1. ЗАПУСК UNIT-ТЕСТОВ (python -m unittest test_email_validator -v)
+----------------------------------------------------------------------
+test_empty_text (test_email_validator.TestFindEmails.test_empty_text) ... ok
+test_exclamation_after_email (test_email_validator.TestFindEmails.test_exclamation_after_email) ... ok
+test_find_multiple_emails (test_email_validator.TestFindEmails.test_find_multiple_emails) ... ok
+test_find_single_email (test_email_validator.TestFindEmails.test_find_single_email) ... ok
+test_invalid_candidates_are_skipped (test_email_validator.TestFindEmails.test_invalid_candidates_are_skipped) ... ok
+test_no_duplicates_in_result (test_email_validator.TestFindEmails.test_no_duplicates_in_result) ... ok
+test_text_without_emails (test_email_validator.TestFindEmails.test_text_without_emails) ... ok
+test_trailing_punctuation_is_not_included (test_email_validator.TestFindEmails.test_trailing_punctuation_is_not_included) ... ok
+test_find_in_existing_file (test_email_validator.TestFindEmailsInFile.test_find_in_existing_file) ... ok
+test_missing_file_raises_error (test_email_validator.TestFindEmailsInFile.test_missing_file_raises_error) ... ok
+test_invalid_scheme_raises_value_error (test_email_validator.TestFindEmailsOnWebpage.test_invalid_scheme_raises_value_error) ... ok
+test_plain_text_raises_value_error (test_email_validator.TestFindEmailsOnWebpage.test_plain_text_raises_value_error) ... ok
+test_domain_label_ends_with_hyphen (test_email_validator.TestIsValidEmail.test_domain_label_ends_with_hyphen) ... ok
+test_domain_label_starts_with_hyphen (test_email_validator.TestIsValidEmail.test_domain_label_starts_with_hyphen) ... ok
+test_double_at_sign (test_email_validator.TestIsValidEmail.test_double_at_sign) ... ok
+test_double_dot_in_local_part (test_email_validator.TestIsValidEmail.test_double_dot_in_local_part) ... ok
+test_email_too_long (test_email_validator.TestIsValidEmail.test_email_too_long) ... ok
+test_empty_string (test_email_validator.TestIsValidEmail.test_empty_string) ... ok
+test_local_part_ends_with_dot (test_email_validator.TestIsValidEmail.test_local_part_ends_with_dot) ... ok
+test_local_part_starts_with_dot (test_email_validator.TestIsValidEmail.test_local_part_starts_with_dot) ... ok
+test_local_part_too_long (test_email_validator.TestIsValidEmail.test_local_part_too_long) ... ok
+test_no_at_sign (test_email_validator.TestIsValidEmail.test_no_at_sign) ... ok
+test_no_domain (test_email_validator.TestIsValidEmail.test_no_domain) ... ok
+test_no_local_part (test_email_validator.TestIsValidEmail.test_no_local_part) ... ok
+test_no_tld (test_email_validator.TestIsValidEmail.test_no_tld) ... ok
+test_none_value (test_email_validator.TestIsValidEmail.test_none_value) ... ok
+test_simple_valid_email (test_email_validator.TestIsValidEmail.test_simple_valid_email) ... ok
+test_space_in_email (test_email_validator.TestIsValidEmail.test_space_in_email) ... ok
+test_tld_too_short (test_email_validator.TestIsValidEmail.test_tld_too_short) ... ok
+test_tld_with_digits (test_email_validator.TestIsValidEmail.test_tld_with_digits) ... ok
+test_valid_email_with_digits_and_dots (test_email_validator.TestIsValidEmail.test_valid_email_with_digits_and_dots) ... ok
+test_valid_email_with_hyphen_in_domain (test_email_validator.TestIsValidEmail.test_valid_email_with_hyphen_in_domain) ... ok
+test_valid_email_with_plus_and_percent (test_email_validator.TestIsValidEmail.test_valid_email_with_plus_and_percent) ... ok
+test_valid_email_with_subdomain (test_email_validator.TestIsValidEmail.test_valid_email_with_subdomain) ... ok
+test_valid_long_tld (test_email_validator.TestIsValidEmail.test_valid_long_tld) ... ok
+
+----------------------------------------------------------------------
+Ran 35 tests in 0.004s
+
+OK
+
+2. ДЕМОНСТРАЦИЯ: ПРОВЕРКА ОТДЕЛЬНЫХ АДРЕСОВ (режим 1)
+----------------------------------------------------------------------
+  ivan.petrov@mail.ru                 -> корректный
+  user+tag@example.com                -> корректный
+  admin@mail.corp.example.co.uk       -> корректный
+  user@example                        -> НЕкорректный
+  .user@example.com                   -> НЕкорректный
+  us..er@example.com                  -> НЕкорректный
+  user@-example.com                   -> НЕкорректный
+
+3. ДЕМОНСТРАЦИЯ: ПОИСК E-MAIL В ТЕКСТЕ (режим 2)
+----------------------------------------------------------------------
+  Текст: Контакты отдела: sales@shop-online.com, support@site.ru. Некорректные: bad@mail, user@-bad.com. Повтор: support@site.ru
+  Найдено адресов: 2
+    1. sales@shop-online.com
+    2. support@site.ru
+
+4. ДЕМОНСТРАЦИЯ: ПОИСК E-MAIL В ФАЙЛЕ (режим 3)
+----------------------------------------------------------------------
+  Файл: C:\Users\Bogdan\AppData\Local\Temp\tmpzlngjrxl.txt
+  Найдено адресов: 2
+    1. info@company.ru
+    2. ceo@company.ru
